@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "workspaces": [
+    "workspace/apps/**/*",
+    "workspace/packages/*",
+    "workspace/tools/*",
+    "workspace/pipeline/*"
+  ],
+  "scripts": {
+    "prebuild": "turbo run prebuild",
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev --parallel",
+    "dev:apps": "node ./scripts/dev-apps.js",
+    "dev:apps:starkgate/web": "pnpm run dev:apps starkgate/web",
+    "format": "sort-package-json && prettier --write \"**.+(js|json|md|yaml)\" && turbo run format --parallel",
+    "lint": "turbo run lint",
+    "npkill": "npkill",
+    "pack": "turbo run pack",
+    "pipeline": "pipeline"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "eslint-config-base": "workspace:*",
+    "npkill": "^0.10.0",
+    "prettier": "^2.8.4",
+    "sort-package-json": "^2.4.1",
+    "turbo": "1.9.3"
+  },
+  "packageManager": "pnpm@8.3.1",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "pnpm": {
+    "neverBuiltDependencies": [
+      "node-hid",
+      "usb"
+    ],
+    "overrides": {
+      "ethereumjs-abi": "0.6.8"
+    }
+  }
+}
